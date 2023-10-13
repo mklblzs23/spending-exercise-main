@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from './Header';
-import { MainContainer } from '../styles/ComponentStyles';
+import { MainContainer } from '../styles';
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title }) => (
   <>
-    <Header />
+    <Header title={title} />
     <MainContainer>{children}</MainContainer>
   </>
 );

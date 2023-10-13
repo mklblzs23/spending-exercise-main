@@ -21,6 +21,8 @@ const GlobalStyle = createGlobalStyle`
     --color-black: #2e2e2e;
     --color-blue: #307CCC;
     --font-family:'Karla', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+    height: 100%;
+    width: 100%;
   }
 
   html {
