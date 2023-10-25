@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
 
+import React, { useState } from 'react';
 import { FiltersWrapper } from '../../styles';
 import { Filters, Select } from '../../components';
 import { CURRENCY } from '../../constants/Currency';
 
-export default function FiltersAndOrderings(props) {
+type OrderType = {
+  name: string,
+  value: string,
+};
+
+type FiltersAndOrderingsProps = {
+  filterSpendings: (event: React.MouseEvent<HTMLButtonElement>) => void,
+  orderSpendings: (value: string) => void,
+  currencyFilter: string,
+};
+
+export default function FiltersAndOrderings(props: FiltersAndOrderingsProps) {
   const { filterSpendings, orderSpendings, currencyFilter } = props;
 
   const [currencyFilters] = useState([
@@ -13,8 +24,8 @@ export default function FiltersAndOrderings(props) {
     CURRENCY.USA,
   ]);
 
-  const [orders] = useState([
-    { 
+  const [orders] = useState<OrderType[]>([
+    {
       name: 'Sort by Date descending (default)',
       value: '-date',
     },
@@ -32,15 +43,21 @@ export default function FiltersAndOrderings(props) {
     },
   ]);
 
+  function handleSpendingsOrder(event: React.ChangeEvent<HTMLSelectElement>) {
+    const value = event.target.value;
+    orderSpendings(value);
+  }
+
   return (
     <FiltersWrapper>
       <Select
         options={orders}
-        onChange={(event) => orderSpendings(event.target.value)}
+        onChange={handleSpendingsOrder}
+        name="order"
       />
       <Filters
         filters={currencyFilters}
-        onChange={(event) => filterSpendings(event.target.name)}
+        onChange={filterSpendings}
         selected={currencyFilter}
       />
     </FiltersWrapper>

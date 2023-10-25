@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Header from './Header';
 import { MainContainer } from '../styles';
 
-const Layout = ({ children, title }) => (
+type LayourProps = {
+  children: ReactNode,
+  title: string,
+};
+
+const Layout = ({ children, title }: LayourProps) => (
   <>
     <Header title={title} />
     <MainContainer>{children}</MainContainer>

@@ -5,9 +5,9 @@ export const FiltersWrapper = styled.div`
   display: flex;
   margin-bottom: 2rem;
 
-@media (max-width: 756px) {
-  flex-direction: column;
-}
+  @media (max-width: 756px) {
+    flex-direction: column;
+  }
 `;
 
 export const FormStyles = styled.form`
@@ -17,8 +17,7 @@ export const FormStyles = styled.form`
   margin-bottom: 4rem;
 `;
 
-
-export const Spending = styled.article`
+export const SpendingCard = styled.article`
   border-radius: 8px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -68,7 +67,6 @@ export const IconWrapper = styled.div`
   }
 `;
 
-
 export const TextWrapper = styled.div`
   @media (max-width: 756px) {
     text-align: center;
@@ -85,13 +83,18 @@ export const AmountWrapper = styled.div`
   }
 `;
 
-export const Amount = styled.h3`
+type AmountProp = {
+  $currency: string;
+};
+
+export const Amount = styled.h3<AmountProp>`
   &::before {
-    content: '${(props) => (props.$currency === CURRENCY.USA ? '$' : '')}';
+    content: "${(props) => (props.$currency === CURRENCY.USA ? '$' : '')}";
   }
 
   &::after {
-    content: '${(props) => (props.$currency === CURRENCY.HUNGARY ? ' HUF' : '')}';
+    content: "${(props) =>
+    props.$currency === CURRENCY.HUNGARY ? ' HUF' : ''}";
   }
 `;
 

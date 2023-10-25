@@ -1,6 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled, { Interpolation, css } from 'styled-components';
 
-export const SelectStyles = styled.select`
+type SelectStylesProp = {
+  style?: Interpolation<object>,
+};
+
+export const SelectStyles = styled.select<SelectStylesProp>`
   appearance: none;
   border: none;
   margin: 0;
@@ -17,7 +21,11 @@ export const SelectStyles = styled.select`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
-  ${(props) => props.style && css`${props.style}`}
+  ${(props) =>
+    props.style &&
+    css`
+      ${props.style}
+    `}
 `;
 
 export const CurrencySelectStyle = styled(SelectStyles)`

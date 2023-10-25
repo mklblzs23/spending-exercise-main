@@ -6,22 +6,24 @@ export const FiltersContainer = styled.div`
   gap: 1rem;
   margin-left: auto;
 
-@media (max-width: 756px) {
-  margin-top: 1rem;
-}
+  @media (max-width: 756px) {
+    margin-top: 1rem;
+  }
 `;
 
-export const FilterButton = styled.button`
+type FilterButtonProp = {
+  selected: string | undefined;
+};
+
+export const FilterButton = styled.button<FilterButtonProp>`
   border: none;
   font-family: var(--font-family);
   font-size: 20px;
   cursor: pointer;
   background-color: ${(p) =>
     p.name === p.selected ? '#d1e7fb' : 'var(--color-white)'};
-  color: ${(p) =>
-    p.name === p.selected ? 'var(--color-blue)' : 'inherit'};
+  color: ${(p) => (p.name === p.selected ? 'var(--color-blue)' : 'inherit')};
   font-weight: ${(p) => (p.name === p.selected ? '700' : '400')};
-  background-color: ${(props) => (props.isSelected && 'blue')};
   border-radius: 8px;
   padding: 4px 12px;
   /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -30,7 +32,7 @@ export const FilterButton = styled.button`
 
 export const HeaderStyles = styled.header`
   margin-bottom: 4rem;
-  font-family: 'Montserrat', 'Poppins', var(--font-family);
+  font-family: "Montserrat", "Poppins", var(--font-family);
 
   ul {
     list-style-type: none;
@@ -79,7 +81,7 @@ export const LdsDualRing = styled.div`
   height: 80px;
 
   &::after {
-    content: ' ';
+    content: " ";
     display: block;
     width: 64px;
     height: 64px;

@@ -2,15 +2,20 @@ import React from 'react';
 import { isEmpty } from 'lodash';
 import { FiltersContainer, FilterButton } from '../styles';
 
+type FiltersProp = {
+  filters: string[] | undefined;
+  onChange: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  selected: string;
+};
 
-export default function Filters(props) {
+const Filters = (props: FiltersProp) => {
   const { filters, onChange, selected } = props;
 
   if (isEmpty(filters)) return null;
 
   return (
     <FiltersContainer>
-      {filters.map((filterElement, index) => (
+      {filters?.map((filterElement, index) => (
         <FilterButton
           key={index}
           name={filterElement}
@@ -22,4 +27,6 @@ export default function Filters(props) {
       ))}
     </FiltersContainer>
   );
-}
+};
+
+export default Filters;
