@@ -94,7 +94,7 @@ export default function useLoadSpendins() {
           if (a.spent_at) dateA = new Date(a.spent_at).getTime();
           if (b.spent_at) dateB = new Date(b.spent_at).getTime();
         
-          return dateA - dateB;
+          return dateB - dateA;
         });
       break;
     case '-amount_in_huf':

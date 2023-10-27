@@ -17,6 +17,11 @@ export const InputStyles = styled.input`
     color: var(--color-blue);
   }
 
+  &:disabled {
+    opacity: 0.4;
+  }
+
+
   &[type="text"] {
     flex: 1;
   }
@@ -31,7 +36,7 @@ export const InputStyles = styled.input`
     cursor: pointer;
     transition: all 0.3s;
 
-    &:hover {
+    &:not([disabled]):hover {
       transform: translateY(-2px);
     }
 

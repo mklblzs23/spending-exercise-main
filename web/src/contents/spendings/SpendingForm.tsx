@@ -16,12 +16,13 @@ const costumStyle = {
 
 export default function SpendingForm(props: SpendingFormProps) {
   const { addSpending } = props;
-  const [isSaving, setIsSaving] = useState(false);
   const [state, setState] = useState<Spending>({
     description: '',
     amount: '',
     currency: CURRENCY.USA,
   });
+
+  const isSaveDisabled = useMemo(() => (isEmpty(state.description) || isEmpty(state.amount)), [state.description, state.amount]);
 
   const currencies = useMemo(
     () => [
@@ -47,17 +48,8 @@ export default function SpendingForm(props: SpendingFormProps) {
   }
 
   async function submitSpending(event: React.FormEvent<HTMLFormElement>) {
-    event.stopPropagation();
-    if (isEmpty(state.amount) || isEmpty(state.description)) {
-      alert(
-        `The following fields are required: ${
-          isEmpty(state.description) ? '\n description' : ''
-        } ${isEmpty(state.amount) ? '\n amount' : ''}`
-      );
-      return;
-    }
+    event.preventDefault();
     try {
-      setIsSaving(true);
       const saveSpending = await spendingService.saveSpending(state);
 
       if (saveSpending) {
@@ -71,8 +63,6 @@ export default function SpendingForm(props: SpendingFormProps) {
     } catch (error) {
       alert('something went wrong while saving!');
       throw error;
-    } finally {
-      setIsSaving(false);
     }
   }
  
@@ -102,7 +92,7 @@ export default function SpendingForm(props: SpendingFormProps) {
         name="submit"
         type="submit"
         value="Save"
-        disabled={isSaving}
+        disabled={isSaveDisabled}
       />
     </FormStyles>
   );
